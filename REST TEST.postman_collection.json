@@ -1,0 +1,1279 @@
+{
+	"info": {
+		"_postman_id": "55b34bc8-0352-4252-a77a-805fbbf0e409",
+		"name": "REST TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Log in",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"apikey\": \"kukuha\",\r\n  \"pin\": \"4444\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/login",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Token is string\", function () {",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    pm.expect(jsonData.data.token).to.be.a(\"string\");",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "genres",
+			"item": [
+				{
+					"name": "id=16",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is success\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/genres/{{id}}",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"genres",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "id=37",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is not 200\", function () {\r",
+									"    pm.response.to.not.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status is failure\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"failure\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/genres/{{id1}}",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"genres",
+								"{{id1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "companies",
+			"item": [
+				{
+					"name": "id=48",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is success\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"status\": \"success\",\r",
+									"            \"data\": {\r",
+									"                \"id\": 48,\r",
+									"                \"name\": \"Bubble Hits\",\r",
+									"                \"slug\": \"bubble-hits\",\r",
+									"                \"nameTranslations\": [\r",
+									"                    \"eng\"\r",
+									"                ],\r",
+									"                \"overviewTranslations\": [],\r",
+									"                \"aliases\": [],\r",
+									"                \"country\": \"irl\",\r",
+									"                \"primaryCompanyType\": 1,\r",
+									"                \"activeDate\": null,\r",
+									"                \"inactiveDate\": null\r",
+									"            }\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"status\",\r",
+									"        \"data\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"success\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"data\": {\r",
+									"            \"$id\": \"#/properties/data\",\r",
+									"            \"type\": \"object\",\r",
+									"            \"title\": \"The data schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": {},\r",
+									"            \"examples\": [\r",
+									"                {\r",
+									"                    \"id\": 48,\r",
+									"                    \"name\": \"Bubble Hits\",\r",
+									"                    \"slug\": \"bubble-hits\",\r",
+									"                    \"nameTranslations\": [\r",
+									"                        \"eng\"\r",
+									"                    ],\r",
+									"                    \"overviewTranslations\": [],\r",
+									"                    \"aliases\": [],\r",
+									"                    \"country\": \"irl\",\r",
+									"                    \"primaryCompanyType\": 1,\r",
+									"                    \"activeDate\": null,\r",
+									"                    \"inactiveDate\": null\r",
+									"                }\r",
+									"            ],\r",
+									"            \"required\": [\r",
+									"                \"id\",\r",
+									"                \"name\",\r",
+									"                \"slug\",\r",
+									"                \"nameTranslations\",\r",
+									"                \"overviewTranslations\",\r",
+									"                \"aliases\",\r",
+									"                \"country\",\r",
+									"                \"primaryCompanyType\",\r",
+									"                \"activeDate\",\r",
+									"                \"inactiveDate\"\r",
+									"            ],\r",
+									"            \"properties\": {\r",
+									"                \"id\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/id\",\r",
+									"                    \"type\": \"integer\",\r",
+									"                    \"title\": \"The id schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": 0,\r",
+									"                    \"examples\": [\r",
+									"                        48\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"name\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/name\",\r",
+									"                    \"type\": \"string\",\r",
+									"                    \"title\": \"The name schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": \"\",\r",
+									"                    \"examples\": [\r",
+									"                        \"Bubble Hits\"\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"slug\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/slug\",\r",
+									"                    \"type\": \"string\",\r",
+									"                    \"title\": \"The slug schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": \"\",\r",
+									"                    \"examples\": [\r",
+									"                        \"bubble-hits\"\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"nameTranslations\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/nameTranslations\",\r",
+									"                    \"type\": \"array\",\r",
+									"                    \"title\": \"The nameTranslations schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": [],\r",
+									"                    \"examples\": [\r",
+									"                        [\r",
+									"                            \"eng\"\r",
+									"                        ]\r",
+									"                    ],\r",
+									"                    \"additionalItems\": true,\r",
+									"                    \"items\": {\r",
+									"                        \"$id\": \"#/properties/data/properties/nameTranslations/items\",\r",
+									"                        \"anyOf\": [\r",
+									"                            {\r",
+									"                                \"$id\": \"#/properties/data/properties/nameTranslations/items/anyOf/0\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The first anyOf schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"eng\"\r",
+									"                                ]\r",
+									"                            }\r",
+									"                        ]\r",
+									"                    }\r",
+									"                },\r",
+									"                \"overviewTranslations\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/overviewTranslations\",\r",
+									"                    \"type\": \"array\",\r",
+									"                    \"title\": \"The overviewTranslations schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": [],\r",
+									"                    \"examples\": [\r",
+									"                        []\r",
+									"                    ],\r",
+									"                    \"additionalItems\": true,\r",
+									"                    \"items\": {\r",
+									"                        \"$id\": \"#/properties/data/properties/overviewTranslations/items\"\r",
+									"                    }\r",
+									"                },\r",
+									"                \"aliases\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/aliases\",\r",
+									"                    \"type\": \"array\",\r",
+									"                    \"title\": \"The aliases schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": [],\r",
+									"                    \"examples\": [\r",
+									"                        []\r",
+									"                    ],\r",
+									"                    \"additionalItems\": true,\r",
+									"                    \"items\": {\r",
+									"                        \"$id\": \"#/properties/data/properties/aliases/items\"\r",
+									"                    }\r",
+									"                },\r",
+									"                \"country\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/country\",\r",
+									"                    \"type\": \"string\",\r",
+									"                    \"title\": \"The country schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": \"\",\r",
+									"                    \"examples\": [\r",
+									"                        \"irl\"\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"primaryCompanyType\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/primaryCompanyType\",\r",
+									"                    \"type\": \"integer\",\r",
+									"                    \"title\": \"The primaryCompanyType schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": 0,\r",
+									"                    \"examples\": [\r",
+									"                        1\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"activeDate\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/activeDate\",\r",
+									"                    \"type\": \"null\",\r",
+									"                    \"title\": \"The activeDate schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": null,\r",
+									"                    \"examples\": [\r",
+									"                        null\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"inactiveDate\": {\r",
+									"                    \"$id\": \"#/properties/data/properties/inactiveDate\",\r",
+									"                    \"type\": \"null\",\r",
+									"                    \"title\": \"The inactiveDate schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": null,\r",
+									"                    \"examples\": [\r",
+									"                        null\r",
+									"                    ]\r",
+									"                }\r",
+									"            },\r",
+									"            \"additionalProperties\": true\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"};\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"            pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/companies/{{id}}",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"companies",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "id=(-1)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is not 200\", function () {\r",
+									"    pm.response.to.not.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status is failure\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"failure\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/companies/{{id1}}",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"companies",
+								"{{id1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "series",
+			"item": [
+				{
+					"name": "id = 70383",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is success\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/series/{{id}}",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"series",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "id = (-1)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is not 200\", function () {\r",
+									"    pm.response.to.not.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status is failure\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"failure\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/series/{{id1}}",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"series",
+								"{{id1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "search",
+			"item": [
+				{
+					"name": "glass, 2014",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is success\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/search?query=glass&year=2014",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "glass"
+								},
+								{
+									"key": "year",
+									"value": "2014"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "123, false",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is not 200\", function () {\r",
+									"    pm.response.to.not.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status is failure\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"failure\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"data\": [\r",
+									"                {\r",
+									"                    \"aliases\": [\r",
+									"                        \"string\"\r",
+									"                    ],\r",
+									"                    \"companies\": [\r",
+									"                        \"string\"\r",
+									"                    ],\r",
+									"                    \"companyType\": \"string\",\r",
+									"                    \"country\": \"string\",\r",
+									"                    \"director\": \"string\",\r",
+									"                    \"extendedTitle\": \"string\",\r",
+									"                    \"genres\": [\r",
+									"                        \"string\"\r",
+									"                    ],\r",
+									"                    \"id\": \"string\",\r",
+									"                    \"imageUrl\": \"string\",\r",
+									"                    \"name\": \"string\",\r",
+									"                    \"nameTranslated\": \"string\",\r",
+									"                    \"network\": \"string\",\r",
+									"                    \"officialList\": \"string\",\r",
+									"                    \"overview\": \"string\",\r",
+									"                    \"overview_translated\": [\r",
+									"                        \"string\"\r",
+									"                    ],\r",
+									"                    \"posters\": [\r",
+									"                        \"string\"\r",
+									"                    ],\r",
+									"                    \"primaryLanguage\": \"string\",\r",
+									"                    \"primaryType\": \"string\",\r",
+									"                    \"status\": \"string\",\r",
+									"                    \"translationsWithLang\": [\r",
+									"                        \"string\"\r",
+									"                    ],\r",
+									"                    \"tvdb_id\": \"string\",\r",
+									"                    \"type\": \"string\",\r",
+									"                    \"year\": \"string\"\r",
+									"                }\r",
+									"            ],\r",
+									"            \"status\": \"string\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"data\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"data\": {\r",
+									"            \"$id\": \"#/properties/data\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The data schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    {\r",
+									"                        \"aliases\": [\r",
+									"                            \"string\"\r",
+									"                        ],\r",
+									"                        \"companies\": [\r",
+									"                            \"string\"\r",
+									"                        ],\r",
+									"                        \"companyType\": \"string\",\r",
+									"                        \"country\": \"string\",\r",
+									"                        \"director\": \"string\",\r",
+									"                        \"extendedTitle\": \"string\",\r",
+									"                        \"genres\": [\r",
+									"                            \"string\"\r",
+									"                        ],\r",
+									"                        \"id\": \"string\",\r",
+									"                        \"imageUrl\": \"string\",\r",
+									"                        \"name\": \"string\",\r",
+									"                        \"nameTranslated\": \"string\",\r",
+									"                        \"network\": \"string\",\r",
+									"                        \"officialList\": \"string\",\r",
+									"                        \"overview\": \"string\",\r",
+									"                        \"overview_translated\": [\r",
+									"                            \"string\"\r",
+									"                        ],\r",
+									"                        \"posters\": [\r",
+									"                            \"string\"\r",
+									"                        ],\r",
+									"                        \"primaryLanguage\": \"string\",\r",
+									"                        \"primaryType\": \"string\",\r",
+									"                        \"status\": \"string\",\r",
+									"                        \"translationsWithLang\": [\r",
+									"                            \"string\"\r",
+									"                        ],\r",
+									"                        \"tvdb_id\": \"string\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"year\": \"string\"\r",
+									"                    }\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/data/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/data/items/anyOf/0\",\r",
+									"                        \"type\": \"object\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": {},\r",
+									"                        \"examples\": [\r",
+									"                            {\r",
+									"                                \"aliases\": [\r",
+									"                                    \"string\"\r",
+									"                                ],\r",
+									"                                \"companies\": [\r",
+									"                                    \"string\"\r",
+									"                                ],\r",
+									"                                \"companyType\": \"string\",\r",
+									"                                \"country\": \"string\",\r",
+									"                                \"director\": \"string\",\r",
+									"                                \"extendedTitle\": \"string\",\r",
+									"                                \"genres\": [\r",
+									"                                    \"string\"\r",
+									"                                ],\r",
+									"                                \"id\": \"string\",\r",
+									"                                \"imageUrl\": \"string\",\r",
+									"                                \"name\": \"string\",\r",
+									"                                \"nameTranslated\": \"string\",\r",
+									"                                \"network\": \"string\",\r",
+									"                                \"officialList\": \"string\",\r",
+									"                                \"overview\": \"string\",\r",
+									"                                \"overview_translated\": [\r",
+									"                                    \"string\"\r",
+									"                                ],\r",
+									"                                \"posters\": [\r",
+									"                                    \"string\"\r",
+									"                                ],\r",
+									"                                \"primaryLanguage\": \"string\",\r",
+									"                                \"primaryType\": \"string\",\r",
+									"                                \"status\": \"string\",\r",
+									"                                \"translationsWithLang\": [\r",
+									"                                    \"string\"\r",
+									"                                ],\r",
+									"                                \"tvdb_id\": \"string\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"year\": \"string\"\r",
+									"                            }\r",
+									"                        ],\r",
+									"                        \"required\": [\r",
+									"                            \"aliases\",\r",
+									"                            \"companies\",\r",
+									"                            \"companyType\",\r",
+									"                            \"country\",\r",
+									"                            \"director\",\r",
+									"                            \"extendedTitle\",\r",
+									"                            \"genres\",\r",
+									"                            \"id\",\r",
+									"                            \"imageUrl\",\r",
+									"                            \"name\",\r",
+									"                            \"nameTranslated\",\r",
+									"                            \"network\",\r",
+									"                            \"officialList\",\r",
+									"                            \"overview\",\r",
+									"                            \"overview_translated\",\r",
+									"                            \"posters\",\r",
+									"                            \"primaryLanguage\",\r",
+									"                            \"primaryType\",\r",
+									"                            \"status\",\r",
+									"                            \"translationsWithLang\",\r",
+									"                            \"tvdb_id\",\r",
+									"                            \"type\",\r",
+									"                            \"year\"\r",
+									"                        ],\r",
+									"                        \"properties\": {\r",
+									"                            \"aliases\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/aliases\",\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"title\": \"The aliases schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": [],\r",
+									"                                \"examples\": [\r",
+									"                                    [\r",
+									"                                        \"string\"\r",
+									"                                    ]\r",
+									"                                ],\r",
+									"                                \"additionalItems\": true,\r",
+									"                                \"items\": {\r",
+									"                                    \"$id\": \"#/properties/data/items/anyOf/0/properties/aliases/items\",\r",
+									"                                    \"anyOf\": [\r",
+									"                                        {\r",
+									"                                            \"$id\": \"#/properties/data/items/anyOf/0/properties/aliases/items/anyOf/0\",\r",
+									"                                            \"type\": \"string\",\r",
+									"                                            \"title\": \"The first anyOf schema\",\r",
+									"                                            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                            \"default\": \"\",\r",
+									"                                            \"examples\": [\r",
+									"                                                \"string\"\r",
+									"                                            ]\r",
+									"                                        }\r",
+									"                                    ]\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"companies\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/companies\",\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"title\": \"The companies schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": [],\r",
+									"                                \"examples\": [\r",
+									"                                    [\r",
+									"                                        \"string\"\r",
+									"                                    ]\r",
+									"                                ],\r",
+									"                                \"additionalItems\": true,\r",
+									"                                \"items\": {\r",
+									"                                    \"$id\": \"#/properties/data/items/anyOf/0/properties/companies/items\",\r",
+									"                                    \"anyOf\": [\r",
+									"                                        {\r",
+									"                                            \"$id\": \"#/properties/data/items/anyOf/0/properties/companies/items/anyOf/0\",\r",
+									"                                            \"type\": \"string\",\r",
+									"                                            \"title\": \"The first anyOf schema\",\r",
+									"                                            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                            \"default\": \"\",\r",
+									"                                            \"examples\": [\r",
+									"                                                \"string\"\r",
+									"                                            ]\r",
+									"                                        }\r",
+									"                                    ]\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"companyType\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/companyType\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The companyType schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"country\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/country\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The country schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"director\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/director\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The director schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"extendedTitle\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/extendedTitle\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The extendedTitle schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"genres\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/genres\",\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"title\": \"The genres schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": [],\r",
+									"                                \"examples\": [\r",
+									"                                    [\r",
+									"                                        \"string\"\r",
+									"                                    ]\r",
+									"                                ],\r",
+									"                                \"additionalItems\": true,\r",
+									"                                \"items\": {\r",
+									"                                    \"$id\": \"#/properties/data/items/anyOf/0/properties/genres/items\",\r",
+									"                                    \"anyOf\": [\r",
+									"                                        {\r",
+									"                                            \"$id\": \"#/properties/data/items/anyOf/0/properties/genres/items/anyOf/0\",\r",
+									"                                            \"type\": \"string\",\r",
+									"                                            \"title\": \"The first anyOf schema\",\r",
+									"                                            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                            \"default\": \"\",\r",
+									"                                            \"examples\": [\r",
+									"                                                \"string\"\r",
+									"                                            ]\r",
+									"                                        }\r",
+									"                                    ]\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"id\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/id\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The id schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"imageUrl\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/imageUrl\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The imageUrl schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"name\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/name\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The name schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"nameTranslated\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/nameTranslated\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The nameTranslated schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"network\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/network\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The network schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"officialList\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/officialList\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The officialList schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"overview\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/overview\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The overview schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"overview_translated\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/overview_translated\",\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"title\": \"The overview_translated schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": [],\r",
+									"                                \"examples\": [\r",
+									"                                    [\r",
+									"                                        \"string\"\r",
+									"                                    ]\r",
+									"                                ],\r",
+									"                                \"additionalItems\": true,\r",
+									"                                \"items\": {\r",
+									"                                    \"$id\": \"#/properties/data/items/anyOf/0/properties/overview_translated/items\",\r",
+									"                                    \"anyOf\": [\r",
+									"                                        {\r",
+									"                                            \"$id\": \"#/properties/data/items/anyOf/0/properties/overview_translated/items/anyOf/0\",\r",
+									"                                            \"type\": \"string\",\r",
+									"                                            \"title\": \"The first anyOf schema\",\r",
+									"                                            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                            \"default\": \"\",\r",
+									"                                            \"examples\": [\r",
+									"                                                \"string\"\r",
+									"                                            ]\r",
+									"                                        }\r",
+									"                                    ]\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"posters\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/posters\",\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"title\": \"The posters schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": [],\r",
+									"                                \"examples\": [\r",
+									"                                    [\r",
+									"                                        \"string\"\r",
+									"                                    ]\r",
+									"                                ],\r",
+									"                                \"additionalItems\": true,\r",
+									"                                \"items\": {\r",
+									"                                    \"$id\": \"#/properties/data/items/anyOf/0/properties/posters/items\",\r",
+									"                                    \"anyOf\": [\r",
+									"                                        {\r",
+									"                                            \"$id\": \"#/properties/data/items/anyOf/0/properties/posters/items/anyOf/0\",\r",
+									"                                            \"type\": \"string\",\r",
+									"                                            \"title\": \"The first anyOf schema\",\r",
+									"                                            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                            \"default\": \"\",\r",
+									"                                            \"examples\": [\r",
+									"                                                \"string\"\r",
+									"                                            ]\r",
+									"                                        }\r",
+									"                                    ]\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"primaryLanguage\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/primaryLanguage\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The primaryLanguage schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"primaryType\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/primaryType\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The primaryType schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"status\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/status\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The status schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"translationsWithLang\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/translationsWithLang\",\r",
+									"                                \"type\": \"array\",\r",
+									"                                \"title\": \"The translationsWithLang schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": [],\r",
+									"                                \"examples\": [\r",
+									"                                    [\r",
+									"                                        \"string\"\r",
+									"                                    ]\r",
+									"                                ],\r",
+									"                                \"additionalItems\": true,\r",
+									"                                \"items\": {\r",
+									"                                    \"$id\": \"#/properties/data/items/anyOf/0/properties/translationsWithLang/items\",\r",
+									"                                    \"anyOf\": [\r",
+									"                                        {\r",
+									"                                            \"$id\": \"#/properties/data/items/anyOf/0/properties/translationsWithLang/items/anyOf/0\",\r",
+									"                                            \"type\": \"string\",\r",
+									"                                            \"title\": \"The first anyOf schema\",\r",
+									"                                            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                            \"default\": \"\",\r",
+									"                                            \"examples\": [\r",
+									"                                                \"string\"\r",
+									"                                            ]\r",
+									"                                        }\r",
+									"                                    ]\r",
+									"                                }\r",
+									"                            },\r",
+									"                            \"tvdb_id\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/tvdb_id\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The tvdb_id schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"type\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/type\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The type schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            },\r",
+									"                            \"year\": {\r",
+									"                                \"$id\": \"#/properties/data/items/anyOf/0/properties/year\",\r",
+									"                                \"type\": \"string\",\r",
+									"                                \"title\": \"The year schema\",\r",
+									"                                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                                \"default\": \"\",\r",
+									"                                \"examples\": [\r",
+									"                                    \"string\"\r",
+									"                                ]\r",
+									"                            }\r",
+									"                        },\r",
+									"                        \"additionalProperties\": true\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"string\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"            pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/search?query=123&year=false",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "123"
+								},
+								{
+									"key": "year",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "lang",
+			"item": [
+				{
+					"name": "lang",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is success\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api4.thetvdb.com/v4/languages",
+							"protocol": "https",
+							"host": [
+								"api4",
+								"thetvdb",
+								"com"
+							],
+							"path": [
+								"v4",
+								"languages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJrdWt1aGEiLCJjb21tdW5pdHlfc3VwcG9ydGVkIjpmYWxzZSwiZXhwIjoxNjE2MjY1MzExLCJpZCI6IjAiLCJpc19tb2QiOmZhbHNlLCJpc19zeXN0ZW1fa2V5IjpmYWxzZSwicGluIjoiNDQ0NCJ9.CziBF9NZ3JbbzBrIR3XPLmW0IW7b55262vinX3n9Z3RjaeCVK8FLFOiTmd2_83-b3OhHqg5H1qqm4vI_h7pJtXSDeRubZBvrn765PW9cLDU_3lDIm0I73iRHZGa7iJVtIZ8UNWG83euHRx0gTYc7NvcbCisSfJFoN_gcwTscGETbOlkJyUMVwDIzf01LH-Fsp0WR7fgb3oNp7kOxdPJ-8MSq1vvZ_Zmj5P5p3rp3bvkKACrXh3UG2BKiWCPATxR2x4NVBB6czPaHRO_HkJP1WSCLqrA-sIlXYCbu7n3ho2PjnXqtaEQM9PTHS7IYnRoXzSu4boKQlmyPjTuCFE277FwsV6VPaZOdMKWadUx_ff0YlKtCaep91jrfyz_GmDj3RevO_Vpwi91YGzvWXYeq7lE-FWNuVlLu2RCvX-rarDl79wpPhyqVMJnvYEjt8EtDghNl8L8cjSuXzZOIdWcuf3cqCPRqy4VY0dYfe-euUBGW5xAno6fmz7HBfoAPrssm6giU8vYrue5RZvZ36wrC2kF3iuPaFSb6ZBdc01Yo3EE_xbNwknwX8tNiC_LWcidKO8YIvTg7guuDsXM6fidMGqAl2q5D6S2_kyE0jrvfauZhfXdIC9oNS3HschCnnp12FPoFgL9MO06a8YY_kVLrrsfDMaiJYNYaCH1fM32Hfz4",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "48"
+		},
+		{
+			"key": "id1",
+			"value": "-1"
+		}
+	]
+}
